@@ -60,4 +60,38 @@ public class Carrera {
     public void setListaDeVehiculos(List<Vehiculo> listaDeVehiculos) {
         this.listaDeVehiculos = listaDeVehiculos;
     }
+
+
+    public void darDeAltaAuto(Integer velocidad,Integer aceleracion,Integer anguloDeGiro,String patente){
+        Auto unAutoARegistrar = new Auto(velocidad,aceleracion,anguloDeGiro,patente);
+        if (hayCupoDisponible()){
+            this.listaDeVehiculos.add(unAutoARegistrar);
+            System.out.println("Auto dado de alta exitosamente");
+        }else{
+            System.out.println("No Hay cupo disponible");
+        }
+
+    }
+
+
+
+    public void darDeAltaMoto(Integer velocidad,Integer aceleracion,Integer anguloDeGiro,String patente){
+        Moto unaMotoARegistrar = new Moto(velocidad,aceleracion,anguloDeGiro,patente);
+        if (hayCupoDisponible()){
+            this.listaDeVehiculos.add(unaMotoARegistrar);
+            System.out.println("Moto dado de alta exitosamente");
+        }else{
+            System.out.println("No Hay cupo disponible");
+        }
+    }
+
+    /**
+     * tengo cupo disponible si la cantidad de elementos en mi lista de vehiculos
+     *  no supera la cantidad de vehiculos permitidos
+     * @return
+     */
+    private boolean hayCupoDisponible() {
+        return this.listaDeVehiculos.size() < this.cantidadDeVehiculosPermitidos;
+    }
+
 }
