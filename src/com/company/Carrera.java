@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Set;
 
 public class Carrera {
 
@@ -73,8 +73,6 @@ public class Carrera {
 
     }
 
-
-
     public void darDeAltaMoto(Integer velocidad,Integer aceleracion,Integer anguloDeGiro,String patente){
         Moto unaMotoARegistrar = new Moto(velocidad,aceleracion,anguloDeGiro,patente);
         if (hayCupoDisponible()){
@@ -84,6 +82,50 @@ public class Carrera {
             System.out.println("No Hay cupo disponible");
         }
     }
+
+
+
+    public void eliminarVehiculo(Vehiculo unVehiculo){
+        this.listaDeVehiculos.remove(unVehiculo);
+    }
+
+    /**
+     * 1 ) Encontrar el vehiculo a eliminar dentro de mi lista de vehiculos.
+     * 2 ) Luego cuando las patentes sean iguales elimino el vehiculo de mi lista de vehiculos
+     * @param patenteAEliminar
+     */
+    public void eliminarVehiculo(String patenteAEliminar){
+        //foreach funciona para to do lo que sea iterable
+        Vehiculo vehiculoAEliminar = null;
+
+        for (Vehiculo vehiculo : this.listaDeVehiculos) {
+            if (vehiculo.getPatente().equals(patenteAEliminar)){
+                vehiculoAEliminar = vehiculo;
+                break;
+            }
+        }
+        eliminarVehiculo(vehiculoAEliminar);
+    }
+
+    /**
+     * Metodo para buscar un vehiculo por una patente.
+     * @param patente
+     * @return
+     */
+    private Vehiculo buscarVehiculo(String patente){
+        Vehiculo vehiculoABuscar = null;
+
+        for (Vehiculo vehiculo : this.listaDeVehiculos) {
+            if (vehiculo.getPatente().equals(patente)){
+                vehiculoABuscar = vehiculo;
+                break;
+            }
+        }
+
+        return vehiculoABuscar;
+    }
+
+
 
     /**
      * tengo cupo disponible si la cantidad de elementos en mi lista de vehiculos
