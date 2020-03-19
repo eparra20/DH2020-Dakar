@@ -1,7 +1,7 @@
 package com.company;
 
 
-public class Vehiculo {
+public abstract class Vehiculo {
 
     private Integer velocidad;
     private Integer aceleracion;
