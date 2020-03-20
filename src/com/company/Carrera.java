@@ -162,7 +162,7 @@ public class Carrera {
     }
 
     public void socorrerMoto(String patente) {
-        Moto vehiculo = buscarVehiculo(patente);
+        Vehiculo vehiculo = buscarVehiculo(patente);
 
         if (vehiculo instanceof Moto) {
             Moto unaMoto = (Moto) vehiculo;
