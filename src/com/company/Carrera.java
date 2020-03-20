@@ -16,8 +16,8 @@ public class Carrera {
     private SocorristaAuto socorristaAuto;
     private SocorristaMoto socorristaMoto;
 
-    public Carrera(Integer distancia, Double premioEnDolares, String nombre, Integer cantidadDeVehiculosPermitidos,
-                    SocorristaMoto socorristaMoto, SocorristaAuto socorristaAuto) {
+    public Carrera(Integer distancia, Double premioEnDolares, String nombre, Integer cantidadDeVehiculosPermitidos, SocorristaMoto socorristaMoto,
+        SocorristaAuto socorristaAuto) {
         this.distancia = distancia;
         this.premioEnDolares = premioEnDolares;
         this.nombre = nombre;
@@ -67,45 +67,43 @@ public class Carrera {
         this.listaDeVehiculos = listaDeVehiculos;
     }
 
-
-    public void darDeAltaAuto(Integer velocidad,Integer aceleracion,Integer anguloDeGiro,String patente){
-        Auto unAutoARegistrar = new Auto(velocidad,aceleracion,anguloDeGiro,patente);
-        if (hayCupoDisponible()){
+    public void darDeAltaAuto(Integer velocidad, Integer aceleracion, Integer anguloDeGiro, String patente) {
+        Auto unAutoARegistrar = new Auto(velocidad, aceleracion, anguloDeGiro, patente);
+        if (hayCupoDisponible()) {
             this.listaDeVehiculos.add(unAutoARegistrar);
             System.out.println("Auto dado de alta exitosamente");
-        }else{
+        } else {
             System.out.println("No Hay cupo disponible");
         }
 
     }
 
-    public void darDeAltaMoto(Integer velocidad,Integer aceleracion,Integer anguloDeGiro,String patente){
-        Moto unaMotoARegistrar = new Moto(velocidad,aceleracion,anguloDeGiro,patente);
-        if (hayCupoDisponible()){
+    public void darDeAltaMoto(Integer velocidad, Integer aceleracion, Integer anguloDeGiro, String patente) {
+        Moto unaMotoARegistrar = new Moto(velocidad, aceleracion, anguloDeGiro, patente);
+        if (hayCupoDisponible()) {
             this.listaDeVehiculos.add(unaMotoARegistrar);
             System.out.println("Moto dado de alta exitosamente");
-        }else{
+        } else {
             System.out.println("No Hay cupo disponible");
         }
     }
 
-
-
-    public void eliminarVehiculo(Vehiculo unVehiculo){
+    public void eliminarVehiculo(Vehiculo unVehiculo) {
         this.listaDeVehiculos.remove(unVehiculo);
     }
 
     /**
      * 1 ) Encontrar el vehiculo a eliminar dentro de mi lista de vehiculos.
      * 2 ) Luego cuando las patentes sean iguales elimino el vehiculo de mi lista de vehiculos
+     *
      * @param patenteAEliminar
      */
-    public void eliminarVehiculo(String patenteAEliminar){
+    public void eliminarVehiculo(String patenteAEliminar) {
         //foreach funciona para to do lo que sea iterable
         Vehiculo vehiculoAEliminar = null;
 
         for (Vehiculo vehiculo : this.listaDeVehiculos) {
-            if (vehiculo.getPatente().equals(patenteAEliminar)){
+            if (vehiculo.getPatente().equals(patenteAEliminar)) {
                 vehiculoAEliminar = vehiculo;
                 break;
             }
@@ -115,14 +113,15 @@ public class Carrera {
 
     /**
      * Metodo para buscar un vehiculo por una patente.
+     *
      * @param patente
      * @return
      */
-    private Vehiculo buscarVehiculo(String patente){
+    private Vehiculo buscarVehiculo(String patente) {
         Vehiculo vehiculoABuscar = null;
 
         for (Vehiculo vehiculo : this.listaDeVehiculos) {
-            if (vehiculo.getPatente().equals(patente)){
+            if (vehiculo.getPatente().equals(patente)) {
                 vehiculoABuscar = vehiculo;
                 break;
             }
@@ -135,26 +134,49 @@ public class Carrera {
      * Quien tenga el mayor puntaje. ¿ ?
      * Sera el vehiculo ganador.
      */
-    public void definirGanador(){
+    public void definirGanador() {
         //todo
         Vehiculo vehiculoGanador = null;
         Double puntajeMaximoTemporal = 0.0; //100
 
         for (Vehiculo vehiculo : listaDeVehiculos) {
             Double puntajeDeVehiculo = vehiculo.getPeso() * vehiculo.getAceleracion();
-            if (puntajeDeVehiculo > puntajeMaximoTemporal){
+            if (puntajeDeVehiculo > puntajeMaximoTemporal) {
                 vehiculoGanador = vehiculo;
                 puntajeMaximoTemporal = puntajeDeVehiculo;
             }
         }
 
-        System.out.println("El ganador es: "+vehiculoGanador.getPatente() + " con un puntaje de "+puntajeMaximoTemporal );
+        System.out.println("El ganador es: " + vehiculoGanador.getPatente() + " con un puntaje de " + puntajeMaximoTemporal);
+    }
+
+    public void socorrerAuto(String patente) {
+        Vehiculo vehiculo = buscarVehiculo(patente);
+
+        if (vehiculo instanceof Auto) {
+            Auto unAuto = (Auto) vehiculo;
+            socorristaAuto.socorrer(unAuto);
+        } else {
+            System.out.println("La patente que ingresaste no pertenece a un auto.");
+        }
+    }
+
+    public void socorrerMoto(String patente) {
+        Moto vehiculo = buscarVehiculo(patente);
+
+        if (vehiculo instanceof Moto) {
+            Moto unaMoto = (Moto) vehiculo;
+            socorristaMoto.socorrer(unaMoto);
+        } else {
+            System.out.println("No eres motorizado");
+        }
     }
 
 
     /**
      * tengo cupo disponible si la cantidad de elementos en mi lista de vehiculos
-     *  no supera la cantidad de vehiculos permitidos
+     * no supera la cantidad de vehiculos permitidos
+     *
      * @return
      */
     private boolean hayCupoDisponible() {
