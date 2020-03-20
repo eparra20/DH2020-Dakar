@@ -125,6 +125,25 @@ public class Carrera {
         return vehiculoABuscar;
     }
 
+    /**
+     * Quien tenga el mayor puntaje. ¿ ?
+     * Sera el vehiculo ganador.
+     */
+    public void definirGanador(){
+        //todo
+        Vehiculo vehiculoGanador = null;
+        Double puntajeMaximoTemporal = 0.0; //100
+
+        for (Vehiculo vehiculo : listaDeVehiculos) {
+            Double puntajeDeVehiculo = vehiculo.getPeso() * vehiculo.getAceleracion();
+            if (puntajeDeVehiculo > puntajeMaximoTemporal){
+                vehiculoGanador = vehiculo;
+                puntajeMaximoTemporal = puntajeDeVehiculo;
+            }
+        }
+
+        System.out.println("El ganador es: "+vehiculoGanador.getPatente() + " con un puntaje de "+puntajeMaximoTemporal );
+    }
 
 
     /**
