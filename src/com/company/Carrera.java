@@ -13,12 +13,18 @@ public class Carrera {
     private Integer cantidadDeVehiculosPermitidos;
     private List<Vehiculo> listaDeVehiculos; //una Lista o Conjunto (Set)
 
-    public Carrera(Integer distancia, Double premioEnDolares, String nombre, Integer cantidadDeVehiculosPermitidos) {
+    private SocorristaAuto socorristaAuto;
+    private SocorristaMoto socorristaMoto;
+
+    public Carrera(Integer distancia, Double premioEnDolares, String nombre, Integer cantidadDeVehiculosPermitidos,
+                    SocorristaMoto socorristaMoto, SocorristaAuto socorristaAuto) {
         this.distancia = distancia;
         this.premioEnDolares = premioEnDolares;
         this.nombre = nombre;
         this.cantidadDeVehiculosPermitidos = cantidadDeVehiculosPermitidos;
         this.listaDeVehiculos = new ArrayList<>();
+        this.socorristaAuto = socorristaAuto;
+        this.socorristaMoto = socorristaMoto;
     }
 
     public Integer getDistancia() {
